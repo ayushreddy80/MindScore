@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MindScore — Digital Habits &amp; Well-Being Predictor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#predictor">Skip to predictor</a>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="#top" class="logo" aria-label="MindScore home">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="26" height="26">
+          <circle cx="16" cy="16" r="14" fill="none" stroke="currentColor" stroke-width="2" opacity="0.35"/>
+          <path d="M16 4a12 12 0 0 1 8.5 20.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+          <circle cx="16" cy="16" r="3.2" fill="currentColor"/>
+        </svg>
+      </span>
+      MindScore
+    </a>
+
+    <nav class="main-nav" aria-label="Primary">
+      <a href="#top">Home</a>
+      <a href="#predictor">Predictor</a>
+      <a href="#about">About</a>
+    </nav>
+
+    <div class="header-right">
+      <span class="badge">Model-backed</span>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile">
+    <a href="#top">Home</a>
+    <a href="#predictor">Predictor</a>
+    <a href="#about">About</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">A wellbeing signal, not a verdict</p>
+        <h1>Understand how your digital habits sit with your well-being.</h1>
+        <p class="hero-sub">
+          MindScore is a machine-learning model trained on student lifestyle and social-media
+          usage data. Tell it about your day — screen time, sleep, study, stress — and it
+          estimates a well-being score from 1 to 10.
+        </p>
+        <div class="hero-actions">
+          <a href="#predictor" class="btn btn-primary">Check my score</a>
+          <a href="#how" class="btn btn-ghost">How it works</a>
+        </div>
+        <p class="disclaimer-inline">
+          This prediction is for informational purposes only and is not a medical diagnosis.
+        </p>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <svg class="orbit-dial" viewBox="0 0 360 360" width="360" height="360">
+          <circle class="orbit-ring r1" cx="180" cy="180" r="150"/>
+          <circle class="orbit-ring r2" cx="180" cy="180" r="112"/>
+          <circle class="orbit-ring r3" cx="180" cy="180" r="76"/>
+          <g class="orbit-ticks"></g>
+          <circle class="orbit-dot d1" cx="330" cy="180" r="5"/>
+          <circle class="orbit-dot d2" cx="180" cy="68" r="4"/>
+          <circle class="orbit-dot d3" cx="104" cy="256" r="4.5"/>
+          <text x="180" y="172" class="orbit-figure">1–10</text>
+          <text x="180" y="198" class="orbit-caption">SCALE</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- PREDICTOR -->
+  <section id="predictor" class="predictor">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Get your well-being score</h2>
+        <p>Answer a few questions about your current lifestyle and habits — it takes under a minute.</p>
+      </div>
+
+      <form id="predict-form" class="predict-card" novalidate>
+
+        <fieldset class="field-group group-teal">
+          <legend>Digital habits</legend>
+
+          <div class="field">
+            <label for="platform">Most-used platform</label>
+            <select id="platform" name="most_used_platform" required>
+              <option value="" disabled selected>Select a platform</option>
+              <option>Instagram</option>
+              <option>TikTok</option>
+              <option>YouTube</option>
+              <option>Facebook</option>
+              <option>Snapchat</option>
+              <option>Twitter</option>
+              <option>WhatsApp</option>
+              <option>WeChat</option>
+              <option>LinkedIn</option>
+              <option>LINE</option>
+              <option>KakaoTalk</option>
+              <option>VKontakte</option>
+            </select>
+            <p class="help">The app you spend the most time on day to day.</p>
+          </div>
+
+          <div class="field">
+            <label for="purpose">Main purpose of use</label>
+            <select id="purpose" name="purpose_of_use" required>
+              <option value="" disabled selected>Select a purpose</option>
+              <option>Entertainment</option>
+              <option>Education</option>
+              <option>Networking</option>
+              <option>News</option>
+            </select>
+            <p class="help">What you mostly go there to do.</p>
+          </div>
+
+          <div class="field">
+            <label for="usage">Average daily usage <output for="usage" id="usage-out">3.0</output> hrs</label>
+            <input type="range" id="usage" name="avg_daily_usage_hours" min="0" max="24" step="0.5" value="3" required>
+            <p class="help">Total screen time across all apps, per day.</p>
+          </div>
+
+          <div class="field">
+            <label for="unlocks">Daily phone unlocks</label>
+            <input type="number" id="unlocks" name="daily_unlocks" min="0" max="500" step="1" placeholder="e.g. 45" required>
+            <p class="help">Roughly how many times you unlock your phone a day.</p>
+          </div>
+        </fieldset>
+
+        <fieldset class="field-group group-amber">
+          <legend>Lifestyle</legend>
+
+          <div class="field">
+            <label for="sleep">Sleep per night <output for="sleep" id="sleep-out">7.0</output> hrs</label>
+            <input type="range" id="sleep" name="sleep_hours_per_night" min="0" max="24" step="0.5" value="7" required>
+            <p class="help">Average hours of sleep on a typical night.</p>
+          </div>
+
+          <div class="field">
+            <label for="study">Study / work hours <output for="study" id="study-out">4.0</output> hrs</label>
+            <input type="range" id="study" name="study_hours" min="0" max="24" step="0.5" value="4" required>
+            <p class="help">Time spent studying or working, per day.</p>
+          </div>
+
+          <div class="field">
+            <label for="activity">Physical activity <output for="activity" id="activity-out">2.0</output> hrs</label>
+            <input type="range" id="activity" name="physical_activity_hours" min="0" max="24" step="0.5" value="2" required>
+            <p class="help">Exercise or physical activity per week... measured here as hours per day average.</p>
+          </div>
+        </fieldset>
+
+        <fieldset class="field-group group-coral">
+          <legend>You &amp; stress</legend>
+
+          <div class="field field-inline">
+            <div>
+              <label for="age">Age</label>
+              <input type="number" id="age" name="age" min="10" max="100" step="1" placeholder="e.g. 21" required>
+            </div>
+            <div>
+              <label for="gender">Gender</label>
+              <select id="gender" name="gender" required>
+                <option value="" disabled selected>Select</option>
+                <option>Male</option>
+                <option>Female</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field field-inline">
+            <div>
+              <label for="academic">Academic level</label>
+              <select id="academic" name="academic_level" required>
+                <option value="" disabled selected>Select</option>
+                <option value="High School">High School</option>
+                <option value="Undergraduate">Undergraduate</option>
+                <option value="graduate">Graduate</option>
+              </select>
+            </div>
+            <div>
+              <label for="country">Country</label>
+              <input type="text" id="country" name="country" list="country-list" placeholder="e.g. India" required>
+              <datalist id="country-list">
+                <option value="India"><option value="USA"><option value="Canada">
+                <option value="Australia"><option value="UK"><option value="Germany">
+                <option value="Mexico"><option value="Turkey"><option value="France">
+              </datalist>
+            </div>
+          </div>
+
+          <div class="field">
+            <span class="radio-label">Stress level</span>
+            <div class="radio-row" role="radiogroup" aria-label="Stress level">
+              <label class="radio-pill"><input type="radio" name="stress_level" value="Low" required><span>Low</span></label>
+              <label class="radio-pill"><input type="radio" name="stress_level" value="Medium"><span>Medium</span></label>
+              <label class="radio-pill"><input type="radio" name="stress_level" value="High"><span>High</span></label>
+              <label class="radio-pill"><input type="radio" name="stress_level" value="Very High"><span>Very High</span></label>
+            </div>
+          </div>
+        </fieldset>
+
+        <p class="form-error" id="form-error" role="alert" hidden></p>
+
+        <button type="submit" class="btn btn-primary btn-block" id="predict-btn">
+          <span class="btn-label">Predict my score</span>
+          <span class="btn-spinner" aria-hidden="true"></span>
+        </button>
+      </form>
+
+      <!-- RESULT -->
+      <div class="result-card" id="result-card" hidden aria-live="polite">
+        <div class="result-gauge">
+          <svg viewBox="0 0 200 200" width="180" height="180">
+            <circle class="gauge-track" cx="100" cy="100" r="86"/>
+            <circle class="gauge-fill" id="gauge-fill" cx="100" cy="100" r="86"/>
+          </svg>
+          <div class="gauge-center">
+            <span class="gauge-value" id="gauge-value">0.0</span>
+            <span class="gauge-max">/ 10</span>
+          </div>
+        </div>
+
+        <div class="result-body">
+          <p class="result-label">Your well-being score</p>
+          <h3 class="result-status" id="result-status">—</h3>
+          <p class="result-explanation" id="result-explanation"></p>
+
+          <div class="key-factors">
+            <p class="key-factors-title">Factors the model considered</p>
+            <ul id="key-factors-list"></ul>
+          </div>
+
+          <button type="button" class="btn btn-ghost" id="try-again">Try again</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how" class="how-it-works">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>How it works</h2>
+        <p>A straightforward path from your answers to a prediction.</p>
+      </div>
+      <ol class="timeline">
+        <li>
+          <span class="timeline-index">1</span>
+          <h3>Enter your information</h3>
+          <p>You share a snapshot of your digital habits and lifestyle — nothing is stored.</p>
+        </li>
+        <li>
+          <span class="timeline-index">2</span>
+          <h3>The model analyzes patterns</h3>
+          <p>A trained model compares your inputs against patterns learned from real lifestyle data.</p>
+        </li>
+        <li>
+          <span class="timeline-index">3</span>
+          <h3>You get a score</h3>
+          <p>A well-being estimate from 1–10, with plain-language context for what it means.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- TRUST -->
+  <section id="about" class="trust">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Private by default</h2>
+        <p>A few things worth knowing before you answer honestly.</p>
+      </div>
+
+      <div class="trust-grid">
+        <div class="trust-item trust-teal">
+          <h3>Nothing is saved</h3>
+          <p>Your answers are sent once to get a score and aren't stored anywhere afterward.</p>
+        </div>
+        <div class="trust-item trust-amber">
+          <h3>An estimate, not a verdict</h3>
+          <p>The score reflects patterns in lifestyle data — it's a signal to reflect on, not a fact about you.</p>
+        </div>
+        <div class="trust-item trust-coral">
+          <h3>People come first</h3>
+          <p>If something feels off, a real conversation with someone you trust matters more than any score.</p>
+        </div>
+      </div>
+
+      <div class="faq">
+        <details>
+          <summary>Is this a medical diagnosis?</summary>
+          <p>No. MindScore gives an estimate based on learned patterns in lifestyle data. It can't replace a conversation with a doctor or mental health professional.</p>
+        </details>
+        <details>
+          <summary>How is the score worked out?</summary>
+          <p>It's produced by a model trained on habits like screen time, sleep, study, activity, and stress — it looks for patterns, not causes.</p>
+        </details>
+        <details>
+          <summary>Can I trust the result completely?</summary>
+          <p>Treat it as a starting point for reflection rather than a precise measurement. Everyone's circumstances are different.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- STRESS MANAGEMENT -->
+  <section id="stress" class="stress">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Small habits that ease stress</h2>
+        <p>A score is a snapshot, not a fixed state. These habits tend to move it in the right direction over time.</p>
+      </div>
+
+      <div class="stress-grid">
+        <div class="stress-card stress-teal">
+          <h3>Notice before you reach for it</h3>
+          <p>Unlocking your phone out of habit rather than need is easy to miss. Try noticing the urge before you act on it.</p>
+        </div>
+        <div class="stress-card stress-amber">
+          <h3>Keep a steady sleep window</h3>
+          <p>A consistent sleep and wake time does more for mood and focus than the total number of hours alone.</p>
+        </div>
+        <div class="stress-card stress-coral">
+          <h3>Take a real break</h3>
+          <p>A short walk, a stretch, or a few slow breaths between tasks resets your attention better than switching to another screen.</p>
+        </div>
+        <div class="stress-card stress-teal">
+          <h3>Move a little, often</h3>
+          <p>You don't need a full workout — a few minutes of movement between study or work blocks measurably lowers stress.</p>
+        </div>
+        <div class="stress-card stress-amber">
+          <h3>Protect in-person time</h3>
+          <p>Time with people face to face tends to ease stress more reliably than time spent messaging or scrolling.</p>
+        </div>
+        <div class="stress-card stress-coral">
+          <h3>Talk to someone you trust</h3>
+          <p>If stress feels persistent rather than occasional, a conversation with a friend, family member, or counselor is a good next step.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DISCLAIMER -->
+  <section class="disclaimer">
+    <div class="wrap">
+      <p>
+        This tool provides an estimated score based on patterns learned by a machine-learning
+        model. It is not a medical diagnostic tool and should not replace professional mental
+        health advice. If you're struggling, please reach out to a qualified professional or a
+        trusted support line in your area.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <span class="logo footer-logo">MindScore</span>
+    <span class="footer-tag">Built with machine learning</span>
+    <a href="#" class="footer-github">GitHub</a>
+    <span class="footer-copy">&copy; <span id="year"></span> MindScore</span>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
