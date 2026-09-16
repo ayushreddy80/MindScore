@@ -10,7 +10,7 @@
 const isLocal = ["localhost", "127.0.0.1", ""].includes(window.location.hostname);
 const API_BASE_URL = isLocal
   ? "http://127.0.0.1:2200"
-  : "https://REPLACE-WITH-YOUR-DEPLOYED-API-URL";
+  : "https://mindscore-checker.onrender.com";
 
 document.getElementById("year").textContent = new Date().getFullYear();
 
